@@ -24,11 +24,9 @@ with open('nomes_e_path.txt', 'r') as arquivo:
             text_layer.textItem.contents = str(nome)
         index += 1
         if index % 4 == 0:
-            pyautogui.alert(text='cansei')
             index = 0
             options = ps.JPEGSaveOptions(quality=5)
             nomeimg = "imagem" + str(index2)
             jpg_file = os.path.join("E:/Users/thegu/Documents/ps_py/resources/files", nomeimg + ".jpg")
             doc.saveAs(jpg_file, options, asCopy=True)
-            os.startfile(jpg_file)
             index2 += 1
