@@ -1,4 +1,8 @@
-mae 1, resources/images/mae1.png
-mae 2, resources/images/mae2.png
-mae 3, resources/images/mae3.png
-mae 4, resources/images/mae4.png
+Um , resources/images/mae1.png
+Dois , resources/images/mae2.png
+Tres , resources/images/mae3.png
+Quatro , resources/images/mae4.png
+Cinco , resources/images/mae1.png
+Seis , resources/images/mae2.png
+Sete , resources/images/mae3.png
+Oito , resources/images/mae4.png
