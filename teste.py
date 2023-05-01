@@ -11,3 +11,8 @@ prompt = pyautogui.prompt(text='digite o caminhho do arquivo psd', title='photos
 caminho = os.path.abspath(prompt);
 app = ps.Application()
 app.load(caminho)
+with Session() as ps:
+    doc = ps.active_document
+    layername = 'texto' + "1"
+    text_layer = doc.artLayers.getByName(layername)
+    text_layer.textItem.contents = "Nome da mãe"
