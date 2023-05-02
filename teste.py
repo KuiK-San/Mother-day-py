@@ -1,6 +1,5 @@
 import photoshop.api as ps
 from photoshop import Session
-from tempfile import mkdtemp
 import pyautogui
 import sys, os
 from PIL import Image
@@ -8,11 +7,15 @@ from os import walk, path
 from time import sleep
 sys.path.insert(0, './src')
 
-
+# path input
 prompt = pyautogui.prompt(text='digite o caminhho do arquivo psd', title='photoshop', default='E:/Users/thegu/Documents/ps_py/resources/cartaz_mae.psd')
 caminho = os.path.abspath(prompt);
+
+#open photoshop on path inputed
 app = ps.Application()
 app.load(caminho)
+
+# read bd file
 with open('nomes_e_path.txt', 'r') as arquivo:
     index = 0
     index2 = 1
@@ -20,6 +23,15 @@ with open('nomes_e_path.txt', 'r') as arquivo:
         nome = linha.split(',')[0]
         origem_img = linha.split(',')[1]
         img = linha.split(',')[2]
+
+        # change text layer
+        with Session() as ps:
+            doc = ps.active_document
+            layername = 'texto' + str(index + 1)
+            text_layer = doc.artLayers.getByName(layername)
+            text_layer.textItem.contents = str(nome)
+        
+        # find which image to replace
         match index:
             case 0:
                 pyautogui.click(1029,596, duration=0.5)
@@ -31,29 +43,29 @@ with open('nomes_e_path.txt', 'r') as arquivo:
                 pyautogui.doubleClick(1036,517, duration=0.5)
             case 3:
                 pyautogui.doubleClick(1039,475, duration=0.5)
+
+        #open image as replace
         pyautogui.click(68,17, duration=0.5)
         pyautogui.click(60,405, duration=0.5)
         pyautogui.click(125,49)
         pyautogui.write(origem_img)
         pyautogui.press('enter')
-        pyautogui.press('tab')
-        pyautogui.press('tab')
-        pyautogui.press('tab')
-        pyautogui.press('tab')
-        pyautogui.press('tab')
-        pyautogui.press('tab')
+        pyautogui.click(307,420, duration=0.5)
         pyautogui.write(img)
         pyautogui.press('enter')
+        sleep(1)
         pyautogui.press('enter')
+        sleep(1)
+        #save window
         pyautogui.hotkey('ctrl', 's')
+        sleep(1)
+        #close window
         pyautogui.hotkey('ctrl', 'w')
-        
-        with Session() as ps:
-            doc = ps.active_document
-            layername = 'texto' + str(index + 1)
-            text_layer = doc.artLayers.getByName(layername)
-            text_layer.textItem.contents = str(nome)
+
+        # incremento
         index += 1
+
+        # test for save or not and save
         if index % 4 == 0:
             index = 0
             options = ps.JPEGSaveOptions(quality=5)
