@@ -1,8 +1,4 @@
-Um , E:/Users/thegu/Documents/ps_py/resources/images/, mae1.png
-Dois , E:/Users/thegu/Documents/ps_py/resources/images/, mae2.png
-Tres , E:/Users/thegu/Documents/ps_py/resources/images/, mae3.png
-Quatro , E:/Users/thegu/Documents/ps_py/resources/images/, mae4.png
-Cinco , E:/Users/thegu/Documents/ps_py/resources/images/, mae4.png
-Seis , E:/Users/thegu/Documents/ps_py/resources/images/, mae3.png
-Sete , E:/Users/thegu/Documents/ps_py/resources/images/, mae2.png
-Oito , E:/Users/thegu/Documents/ps_py/resources/images/, mae1.png
+Alandin,mae1.png
+Jamal,mae2.png
+Lindosnjoinson,mae3.png
+Jainson,mae4.png

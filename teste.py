@@ -2,16 +2,15 @@ import photoshop.api as ps
 from photoshop import Session
 import pyautogui
 import sys, os
-from PIL import Image
 from os import walk, path
 from time import sleep
 sys.path.insert(0, './src')
 
 # path input
-prompt = pyautogui.prompt(text='digite o caminhho do arquivo psd', title='photoshop', default='E:/Users/thegu/Documents/ps_py/resources/cartaz_mae.psd')
-caminho = os.path.abspath(prompt);
+prompt = pyautogui.prompt(text='digite o caminhho do arquivo psd', title='photoshop', default='C:/Users/thegu/Documentos/Mother-day-py/')
+caminho = os.path.join(prompt, 'resources/cartaz_mae.psd');
 
-#open photoshop on path inputed
+# open photoshop on path inputed
 app = ps.Application()
 app.load(caminho)
 
@@ -21,8 +20,8 @@ with open('nomes_e_path.txt', 'r') as arquivo:
     index2 = 1
     for linha in arquivo:
         nome = linha.split(',')[0]
-        origem_img = linha.split(',')[1]
-        img = linha.split(',')[2]
+        origem_img = os.path.join(prompt, 'resources/images')
+        img = linha.split(',')[1]
 
         # change text layer
         with Session() as ps:
@@ -44,7 +43,7 @@ with open('nomes_e_path.txt', 'r') as arquivo:
             case 3:
                 pyautogui.doubleClick(1039,475, duration=0.5)
 
-        #open image as replace
+        # open image as replace
         pyautogui.click(68,17, duration=0.5)
         pyautogui.click(60,405, duration=0.5)
         pyautogui.click(125,49)
@@ -56,10 +55,12 @@ with open('nomes_e_path.txt', 'r') as arquivo:
         sleep(1)
         pyautogui.press('enter')
         sleep(1)
-        #save window
+
+        # save document
         pyautogui.hotkey('ctrl', 's')
         sleep(1)
-        #close window
+
+        # close window
         pyautogui.hotkey('ctrl', 'w')
 
         # incremento
@@ -70,6 +71,6 @@ with open('nomes_e_path.txt', 'r') as arquivo:
             index = 0
             options = ps.JPEGSaveOptions(quality=5)
             nomeimg = "imagem" + str(index2)
-            jpg_file = os.path.join("E:/Users/thegu/Documents/ps_py/resources/files", nomeimg + ".jpg")
+            jpg_file = os.path.join(prompt, "resources/files", nomeimg + ".jpg")
             doc.saveAs(jpg_file, options, asCopy=True)
             index2 += 1
