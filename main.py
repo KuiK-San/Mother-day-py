@@ -74,27 +74,7 @@ with open('nomes_e_path.txt', 'r') as arquivo:
             case 3:
                 docRef.activeLayer.name = "foto4"
 
-        """ # open image as replace
-        pyautogui.click(68,17, duration=0.5)
-        pyautogui.click(60,405, duration=0.5)
-        pyautogui.click(125,49)
-        pyautogui.write(origem_img)
-        pyautogui.press('enter')
-        pyautogui.click(307,420, duration=0.5)
-        pyautogui.write(img)
-        pyautogui.press('enter')
-        sleep(2)
-        pyautogui.press('enter')
-        sleep(2)
-        pyautogui.press('enter')
-        # save document
-        pyautogui.hotkey('ctrl', 's')
-        sleep(3)
-
-        # close window
-        pyautogui.hotkey('ctrl', 'w')
-
-        # incremento """
+        # increment
         index += 1
 
         # test for save or not, and save
@@ -105,3 +85,6 @@ with open('nomes_e_path.txt', 'r') as arquivo:
             jpg_file = os.path.join(prompt, "resources/files", nomeimg + ".jpg")
             doc.saveAs(jpg_file, options, asCopy=True)
             index2 += 1
+
+# alert for finally algoritm
+ps.alert('Finalizado!')
