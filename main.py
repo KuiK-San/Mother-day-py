@@ -52,13 +52,13 @@ with open('nomes_e_path.txt', 'r') as arquivo:
         pyautogui.click(307,420, duration=0.5)
         pyautogui.write(img)
         pyautogui.press('enter')
-        sleep(1)
+        sleep(2)
         pyautogui.press('enter')
-        sleep(1)
-
+        sleep(2)
+        pyautogui.press('enter')
         # save document
         pyautogui.hotkey('ctrl', 's')
-        sleep(1)
+        sleep(3)
 
         # close window
         pyautogui.hotkey('ctrl', 'w')
