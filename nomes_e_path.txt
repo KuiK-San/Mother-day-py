@@ -1,8 +1,8 @@
-Neuza   neuza01.png
-Neuza   neuza02.png
-Neuza   neuza03.png
-Quatro  mae4.png
-Cinco   mae4.png
-Seis    mae3.png
-Sete    mae2.png
-Oito    mae1.png
+Neuza,neuza01.png, 
+Neuza,neuza02.png, 
+Neuza,neuza03.png, 
+Quatro,mae4.png, 
+Cinco,mae4.png, 
+Seis,mae3.png, 
+Sete,mae2.png, 
+Oito,mae1.png, 

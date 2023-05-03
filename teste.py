@@ -22,11 +22,12 @@ imagem = os.path.join(prompt, 'resources/images/mae2.png')
 docRef = app.activeDocument
 activeLayerName = docRef.activeLayer.name
 docRef.activeLayer = docRef.layers.item('foto3')
-
+# trocando imagem
 with Session() as ps:
     replace_contents = ps.app.stringIDToTypeID("placedLayerReplaceContents")
     desc = ps.ActionDescriptor
     idnull = ps.app.charIDToTypeID("null")
     desc.putPath(idnull, imagem)
     ps.app.executeAction(replace_contents, desc)
+#renomeando layer
 docRef.activeLayer.name = 'foto3'
