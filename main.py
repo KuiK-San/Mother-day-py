@@ -22,8 +22,8 @@ with open('nomes_e_path.txt', 'r') as arquivo:
     for linha in arquivo:
         nome = linha.split('|')[0]
         origem_img = os.path.join(prompt, 'resources/images/')
-        img = linha.split('|')[1]
-        imagem = os.path.join(origem_img, img)
+        img_1 = linha.split('|')[1]
+        imagem = os.path.join(origem_img, img_1)
         # change text layer
         with Session() as ps:
             doc = ps.active_document
