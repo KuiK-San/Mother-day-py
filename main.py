@@ -86,5 +86,10 @@ with open('nomes_e_path.txt', 'r') as arquivo:
             doc.saveAs(jpg_file, options, asCopy=True)
             index2 += 1
 
+if index != 0:
+    options = ps.JPEGSaveOptions(quality=5)
+    nomeimg = "imagem" + str(index2)
+    jpg_file = os.path.join(prompt, "resources/files", nomeimg + ".jpg")
+    doc.saveAs(jpg_file, options, asCopy=True)
 # alert for finally algoritm
 ps.alert('Finalizado!')
