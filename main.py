@@ -16,76 +16,82 @@ app = ps.Application()
 app.load(caminho)
 
 # read bd file
-with open('nomes_e_path.txt', 'r') as arquivo:
+with open('lista.csv', 'r') as arquivo:
     index = 0
     index2 = 1
+    index3 = 0
     for linha in arquivo:
-        nome = linha.split('|')[0]
-        origem_img = os.path.join(prompt, 'resources/images/')
-        img_1 = linha.split('|')[1]
-        imagem = os.path.join(origem_img, img_1)
-        # change text layer
-        with Session() as ps:
-            doc = ps.active_document
-            layername = 'texto' + str(index + 1)
-            text_layer = doc.artLayers.getByName(layername)
-            text_layer.textItem.contents = str(nome)
+        if index3 != 0:
+            nomearq = linha.split(';')[0]
+            origem_img = linha.split(';')[5]
+            imagem = os.path.join(origem_img, nomearq)
+            nome = nomearq.split('.')[0]
+            nome = nome.split(' ')[0].capitalize()
+
+            # change text layer
+            with Session() as ps:
+                doc = ps.active_document
+                layername = 'texto' + str(index + 1)
+                text_layer = doc.artLayers.getByName(layername)
+                text_layer.textItem.contents = str(nome)
+            
+            # redimensionar imagem
+            img = Image.open(imagem)
+            img_resized = img.resize((240, 240))
+            img_resized.save(imagem)
+
+
+            # find which layer 
+            match index:
+                case 0:
+                    docRef = app.activeDocument
+                    activeLayerName = docRef.activeLayer.name
+                    docRef.activeLayer = docRef.layers.item('foto1')
+                case 1:
+                    docRef = app.activeDocument
+                    activeLayerName = docRef.activeLayer.name
+                    docRef.activeLayer = docRef.layers.item('foto2')
+                case 2:
+                    docRef = app.activeDocument
+                    activeLayerName = docRef.activeLayer.name
+                    docRef.activeLayer = docRef.layers.item('foto3')
+                case 3:
+                    docRef = app.activeDocument
+                    activeLayerName = docRef.activeLayer.name
+                    docRef.activeLayer = docRef.layers.item('foto4')
+
+            # replace image
+            replace_contents = ps.app.stringIDToTypeID("placedLayerReplaceContents")    
+            desc = ps.ActionDescriptor
+            idnull = ps.app.charIDToTypeID("null")
+            desc.putPath(idnull, imagem)
+            ps.app.executeAction(replace_contents, desc)
+
+            # rename layer
+            match index:
+                case 0:
+                    docRef.activeLayer.name = "foto1"
+                case 1:
+                    docRef.activeLayer.name = "foto2"
+                case 2:
+                    docRef.activeLayer.name = "foto3"
+                case 3:
+                    docRef.activeLayer.name = "foto4"
+
+            # increment
+            index += 1
+
+            # test for save or not, and save
+            if index % 4 == 0:
+                index = 0
+                options = ps.JPEGSaveOptions(quality=5)
+                nomeimg = "imagem" + str(index2)
+                jpg_file = os.path.join(prompt, "resources/files", nomeimg + ".jpg")
+                doc.saveAs(jpg_file, options, asCopy=True)
+                index2 += 1
+        index3 += 1
+
         
-        # redimensionar imagem
-        img = Image.open(imagem)
-        img_resized = img.resize((240, 240))
-        img_resized.save(imagem)
-
-
-        # find which layer 
-        match index:
-            case 0:
-                docRef = app.activeDocument
-                activeLayerName = docRef.activeLayer.name
-                docRef.activeLayer = docRef.layers.item('foto1')
-            case 1:
-                docRef = app.activeDocument
-                activeLayerName = docRef.activeLayer.name
-                docRef.activeLayer = docRef.layers.item('foto2')
-            case 2:
-                docRef = app.activeDocument
-                activeLayerName = docRef.activeLayer.name
-                docRef.activeLayer = docRef.layers.item('foto3')
-            case 3:
-                docRef = app.activeDocument
-                activeLayerName = docRef.activeLayer.name
-                docRef.activeLayer = docRef.layers.item('foto4')
-
-        # replace image
-        replace_contents = ps.app.stringIDToTypeID("placedLayerReplaceContents")    
-        desc = ps.ActionDescriptor
-        idnull = ps.app.charIDToTypeID("null")
-        desc.putPath(idnull, imagem)
-        ps.app.executeAction(replace_contents, desc)
-
-        # rename layer
-        match index:
-            case 0:
-                docRef.activeLayer.name = "foto1"
-            case 1:
-                docRef.activeLayer.name = "foto2"
-            case 2:
-                docRef.activeLayer.name = "foto3"
-            case 3:
-                docRef.activeLayer.name = "foto4"
-
-        # increment
-        index += 1
-
-        # test for save or not, and save
-        if index % 4 == 0:
-            index = 0
-            options = ps.JPEGSaveOptions(quality=5)
-            nomeimg = "imagem" + str(index2)
-            jpg_file = os.path.join(prompt, "resources/files", nomeimg + ".jpg")
-            doc.saveAs(jpg_file, options, asCopy=True)
-            index2 += 1
-
 if index != 0:
     options = ps.JPEGSaveOptions(quality=5)
     nomeimg = "imagem" + str(index2)

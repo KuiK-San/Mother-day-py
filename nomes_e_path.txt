@@ -1,6 +1,6 @@
-Neuza|neuza01.png|
-Neuza |neuza02.png|
-Neuza |neuza03.png|
+cu |neuza01.png|
+NEUZA |neuza02.png|
+TEstE JOSE |neuza03.png|
 Quatro|mae4.png|
 Cinco |mae4.png|
 Seis  |mae3.png|
